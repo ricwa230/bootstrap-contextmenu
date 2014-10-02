@@ -131,8 +131,9 @@
 		}
 
 		,getPosition: function(e, $menu) {
-			var mouseX = e.clientX
-				, mouseY = e.clientY
+			if (e.originalEvent) e = e.originalEvent;
+			var mouseX = e.clientX || e.touches[0].clientX
+				, mouseY = e.clientY || e.touches[0].clientY
 				, boundsX = $(window).width()
 				, boundsY = $(window).height()
 				, menuWidth = $menu.find('.dropdown-menu').outerWidth()
@@ -187,6 +188,7 @@
 		.on('contextmenu.context.data-api', toggle, function(e) {
 			$(this).contextmenu('show', e);
 			e.preventDefault();
+			return false;
 		});
 
 }(jQuery));
